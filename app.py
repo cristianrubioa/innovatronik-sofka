@@ -118,7 +118,7 @@ def handle_message(msg):
             'data/data.xlsx')
         worksheet = workbook.sheet_by_name('Sheet3')
         row_ = int(respuesta.index.values[0])
-        res = worksheet.cell(row_+2, 2).value
+        res = worksheet.cell(row_+1, 2).value
 
         concat = res
 
