@@ -5,11 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" type="text/css" media="screen" href="../static/css/styles.css">
-
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
 </head>
 <body>
   <div class="main-card">
-    <div class="main-title"><span>Chatbot</span></div>
+    <div class="main-title"><a href="https://drive.google.com/u/1/uc?id=1jQ6KnTP6vgXHa-HN0JthaX7e5p-TV7G_&export=download" download="dataset.xlsx"><span id="download" style= "color:#d6e6e3;">
+      <i class="fas fa-download"></i></span></a><span>&nbsp;&nbsp;&nbsp;&nbsp;Chatbot</span></div>
     <div class="chat-area" id="message-box"></div>
     <div class="input-div">
       <input class="input-message" type="text" id="message" placeholder="Escribe tu mensaje"/>
@@ -23,6 +24,7 @@
   <script>
     const socket = io();
     addResponseMsg('Hola')
+    addResponseMsg('Si soy el chatbot')
     //socket.emit('message', 'hello');
     socket.on('Hele', function(msg) {
       //console.log(msg);

@@ -4,6 +4,7 @@ from flask import Flask, request, render_template
 from flask_socketio import SocketIO, send, emit
 
 import re
+import xlrd
 import joblib
 
 import warnings
@@ -107,15 +108,25 @@ def handle_message(msg):
         print("Posición_data:", pos, " | Clase: ",
               clase, " | #Clase: ", prediction)
         # print(type(clase))
+        data_r = pd.read_excel('data/data.xlsx', sheet_name='Sheet3')
 
-        if clase[0] == 'saludo':
-            concat = 'Hola papu'
-        else:
-            concat = 'eSRIBA BIEN BOBO'
-        #concat = msg
+        data_n = data_r[data_r['intencion'] == clase[0]]
+        respuesta = data_n['respuesta'].sample()
+        # res = respuesta.to_string()
+
+        workbook = xlrd.open_workbook(
+            'data/data.xlsx')
+        worksheet = workbook.sheet_by_name('Sheet3')
+        row_ = int(respuesta.index.values[0])
+        res = worksheet.cell(row_+2, 2).value
+
+        concat = res
+
         ctxt = {'txt': concat}
-    except:
+    except Exception as e:
+        print(e)
         ctxt = {'txt': 'Entrada no valida'}
+
     emit('Hele', ctxt)
 
     return "Data sent. Please check your program log"
